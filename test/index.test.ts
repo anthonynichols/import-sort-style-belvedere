@@ -74,20 +74,27 @@ describe('sortImports (typescript, BELVEDERE_STYLE)', () => {
     assert.equal(applyChanges(code, changes), expected);
   });
 
-  it('should sort all of the things!', async () => {
-    const {codePrefix1, codePrefix2, expectedPrefix1, expectedPrefix2} = await import('./fixtures/all-of-the-things');
-    const result1 = sortImports(codePrefix1, parser, BELVEDERE_STYLE);
-    const result2 = sortImports(codePrefix2, parser, BELVEDERE_STYLE);
-    const actual1 = result1.code;
-    const actual2 = result2.code;
-    const changes1 = result1.changes;
-    const changes2 = result2.changes;
+  describe('all of the things!', () => {
+    it('should sort all of the things with the ~ prefix', async () => {
+      const {codePrefix1: code, expectedPrefix1: expected} = await import('./fixtures/all-of-the-things');
+      const result = sortImports(code, parser, BELVEDERE_STYLE);
+      const actual = result.code;
+      const changes = result.changes;
 
-    assert.equal(actual1, expectedPrefix1);
-    assert.equal(actual2, expectedPrefix2);
-    assert.equal(applyChanges(codePrefix1, changes1), expectedPrefix1);
-    assert.equal(applyChanges(codePrefix1, changes2), expectedPrefix2);
-  });
+      assert.equal(actual, expected);
+      assert.equal(applyChanges(code, changes), expected);
+    });
+
+    it('should sort all of the things with the _ prefix', async () => {
+      const {codePrefix2: code, expectedPrefix2: expected} = await import('./fixtures/all-of-the-things');
+      const result = sortImports(code, parser, BELVEDERE_STYLE);
+      const actual = result.code;
+      const changes = result.changes;
+
+      assert.equal(actual, expected);
+      assert.equal(applyChanges(code, changes), expected);
+    });
+  })
 
   it('should sort the rando modules', async () => {
     const {code, expected} = await import('./fixtures/rando-test');

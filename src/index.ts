@@ -8,6 +8,16 @@ function isLocalModule(imported: IImport) {
   );
 }
 
+function isStylesheet(imported: IImport) {
+  return (
+    imported.moduleName.endsWith('css') ||
+    imported.moduleName.endsWith('less') ||
+    imported.moduleName.endsWith('sass') ||
+    imported.moduleName.endsWith('scss') ||
+    imported.moduleName.endsWith('styl')
+  );
+}
+
 export default function(styleApi: IStyleAPI): IStyleItem[] {
   const {
     and,
@@ -27,7 +37,7 @@ export default function(styleApi: IStyleAPI): IStyleItem[] {
 
     // * import 'module'
     {
-      match: and(hasNoMember, isAbsoluteModule),
+      match: and(hasNoMember, isAbsoluteModule, not(isStylesheet)),
       sort: moduleName(naturally),
     },
 
@@ -35,7 +45,7 @@ export default function(styleApi: IStyleAPI): IStyleItem[] {
 
     // * import '~/local-module' or '_/local-module'
     {
-      match: and(hasNoMember, isLocalModule),
+      match: and(hasNoMember, isLocalModule, not(isStylesheet)),
       sort: moduleName(naturally),
     },
 
@@ -43,7 +53,7 @@ export default function(styleApi: IStyleAPI): IStyleItem[] {
 
     // * import './relative-module'
     {
-      match: and(hasNoMember, isRelativeModule),
+      match: and(hasNoMember, isRelativeModule, not(isStylesheet)),
       sort: moduleName(naturally),
     },
 
@@ -55,7 +65,7 @@ export default function(styleApi: IStyleAPI): IStyleItem[] {
 
     // * import * as foo | foo | {foo} from 'module'
     {
-      match: and(isAbsoluteModule, not(isLocalModule)),
+      match: and(isAbsoluteModule, not(isLocalModule), not(isStylesheet)),
       sort: moduleName(naturally),
       sortNamedMembers: name(naturally),
     },
@@ -84,6 +94,14 @@ export default function(styleApi: IStyleAPI): IStyleItem[] {
       match: isRelativeModule,
       sort: moduleName(naturally),
       sortNamedMembers: name(naturally),
+    },
+
+    {separator: true},
+
+    // * import 'stylesheet.css|less|sass|scss|styl'
+    {
+      match: and(hasNoMember, isAbsoluteModule, isStylesheet),
+      sort: moduleName(naturally),
     },
 
     {separator: true},
