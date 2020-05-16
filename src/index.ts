@@ -37,7 +37,7 @@ export default function(styleApi: IStyleAPI): IStyleItem[] {
 
     // * import 'module'
     {
-      match: and(hasNoMember, isAbsoluteModule, not(isStylesheet)),
+      match: and(hasNoMember, isAbsoluteModule, not(isLocalModule), not(isStylesheet)),
       sort: moduleName(naturally),
     },
 
@@ -98,9 +98,13 @@ export default function(styleApi: IStyleAPI): IStyleItem[] {
 
     {separator: true},
 
+    // * ----------------------------------------------------------------------
+    // * Import stylesheet
+    // * ----------------------------------------------------------------------
+
     // * import 'stylesheet.css|less|sass|scss|styl'
     {
-      match: and(hasNoMember, isAbsoluteModule, isStylesheet),
+      match: and(hasNoMember, isAbsoluteModule, not(isLocalModule), isStylesheet),
       sort: moduleName(naturally),
     },
 
@@ -116,7 +120,7 @@ export default function(styleApi: IStyleAPI): IStyleItem[] {
 
     // * import './relative-module'
     {
-      match: and(hasNoMember, isRelativeModule, not(isStylesheet)),
+      match: and(hasNoMember, isRelativeModule, isStylesheet),
       sort: moduleName(naturally),
     },
   ];
