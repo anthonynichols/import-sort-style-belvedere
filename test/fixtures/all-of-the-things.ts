@@ -115,3 +115,41 @@ import 'some-sassy-styles.scss';
 import 'some-styles.css';
 import 'some-stylish-styles.styl';
 `.trim() + '\n';
+
+export const codePrefix3 = `
+import 'some-sassy-styles.scss';
+import {isDir, generateId} from '_/utilities';
+import 'some-styles.css';
+import {Zeratul} from '_/Zeratul';
+import 'totally-awesome';
+import 'some-less-styles.less';
+import Abathur from '_/Abathur';
+import {action, computed} from 'mobx';
+import {Icon, Dropdown, Checkbox, Button, Card} from '_/ui';
+import Models from '_/models';
+import React from 'react';
+import 'some-stylish-styles.styl';
+import Services from '_/services';
+import './locally-awesome';
+`.trim() + '\n';
+
+export const expectedPrefix3 = `
+import 'totally-awesome';
+
+import './locally-awesome';
+
+import {action, computed} from 'mobx';
+import React from 'react';
+
+import Abathur from '_/Abathur';
+import Models from '_/models';
+import Services from '_/services';
+import {Button, Card, Checkbox, Dropdown, Icon} from '_/ui';
+import {generateId, isDir} from '_/utilities';
+import {Zeratul} from '_/Zeratul';
+
+import 'some-less-styles.less';
+import 'some-sassy-styles.scss';
+import 'some-styles.css';
+import 'some-stylish-styles.styl';
+`.trim() + '\n';

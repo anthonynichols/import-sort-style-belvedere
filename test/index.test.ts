@@ -94,6 +94,16 @@ describe('sortImports (typescript, BELVEDERE_STYLE)', () => {
       assert.equal(actual, expected);
       assert.equal(applyChanges(code, changes), expected);
     });
+
+    it('should be sure stylesheets are being sorted correctly', async () => {
+      const {codePrefix3: code, expectedPrefix3: expected} = await import('./fixtures/all-of-the-things');
+      const result = sortImports(code, parser, BELVEDERE_STYLE);
+      const actual = result.code;
+      const changes = result.changes;
+
+      assert.equal(actual, expected);
+      assert.equal(applyChanges(code, changes), expected);
+    });
   })
 
   it('should sort the rando modules', async () => {

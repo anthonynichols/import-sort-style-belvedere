@@ -78,7 +78,7 @@ export default function(styleApi: IStyleAPI): IStyleItem[] {
 
     // * import * as foo | foo | {foo} from '~/module' | '_/module'
     {
-      match: isLocalModule,
+      match: and(isLocalModule, not(isStylesheet)),
       sort: moduleName(naturally),
       sortNamedMembers: name(naturally),
     },
@@ -91,7 +91,7 @@ export default function(styleApi: IStyleAPI): IStyleItem[] {
 
     // * import * as foo | foo | {foo} from './module'
     {
-      match: isRelativeModule,
+      match: and(isRelativeModule, not(isStylesheet)),
       sort: moduleName(naturally),
       sortNamedMembers: name(naturally),
     },
@@ -105,5 +105,19 @@ export default function(styleApi: IStyleAPI): IStyleItem[] {
     },
 
     {separator: true},
+
+    // * import '~/local-stylesheet.css|less|sass|scss|styl' or '_/local-stylesheet.css|less|sass|scss|styl'
+    {
+      match: and(hasNoMember, isLocalModule, isStylesheet),
+      sort: moduleName(naturally),
+    },
+
+    {separator: true},
+
+    // * import './relative-module'
+    {
+      match: and(hasNoMember, isRelativeModule, not(isStylesheet)),
+      sort: moduleName(naturally),
+    },
   ];
 }
