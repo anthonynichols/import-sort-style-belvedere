@@ -12,7 +12,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/anthonynichols/import-sort-style-alexandria.git"
+    "url": "git+https://github.com/anthonynichols/import-sort-style-belvedere.git"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
