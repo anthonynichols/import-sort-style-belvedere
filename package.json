@@ -1,8 +1,17 @@
 {
   "name": "@anthonynichols/import-sort-style-belvedere",
   "version": "1.1.4",
-  "author": "Anthony Nichols <hi@anthonynichols.me> (https://github.com/anthonynichols)",
   "description": "Import sort configuration for Belvedere apps",
+  "license": "MIT",
+  "author": "Anthony Nichols <hi@anthonynichols.me> (https://github.com/anthonynichols)",
+  "homepage": "https://github.com/anthonynichols/import-sort-style-belvedere",
+  "bugs": {
+    "url": "https://github.com/anthonynichols/import-sort-style-belvedere/issues"
+  },
+  "repository": "git://github.com/anthonynichols/import-sort-style-belvedere.git",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "keywords": [
     "import",
     "sort",
@@ -10,14 +19,6 @@
     "import-sort",
     "import-sort-style"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/anthonynichols/import-sort-style-belvedere.git"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
-  "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
