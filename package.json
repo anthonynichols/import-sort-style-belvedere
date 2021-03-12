@@ -1,6 +1,6 @@
 {
   "name": "@anthonynichols/import-sort-style-belvedere",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "author": "Anthony Nichols <hi@anthonynichols.me> (https://github.com/anthonynichols)",
   "description": "Import sort configuration for Belvedere apps",
   "keywords": [
